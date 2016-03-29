@@ -2,10 +2,10 @@
 layout: post
 title:  "npm是什么"
 date:   2016-03-29 11:55:25 +0800
-categories: jekyll update
+finished: "☆"
+tag: 'getting-started'
+order: '01'
 ---
-
-# What is npm?
 
 npm makes it easy for JavaScript developers to share and reuse code, and it makes it easy to update the code that you're sharing.
 
