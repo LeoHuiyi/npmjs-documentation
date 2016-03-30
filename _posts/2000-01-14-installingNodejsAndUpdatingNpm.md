@@ -2,28 +2,30 @@
 layout: post
 title:  "安装 nodejs 并更新 npm"
 date:   2016-03-29 11:55:25 +0800
-finished: "☆"
+finished: "★"
 tag: 'getting-started'
 order: '02'
 ---
 
-### Installing Node.js
+### 安装 Node.js
 
-If you're using OS X or Windows, the best way to install Node.js is to use one of the installers from nodejs.org. If you're using Linux, you can use the installer, or you can check NodeSource's binary distributions to see whether or not there's a more recent version that works with your system.
+如果你的系统是 OS X 或者 Windows, 那么安装 Node.js 最好的方式是使用 [nodejs.org](https://nodejs.org/en/) 网站中的安装软件来安装。
+如果你使用的是 Linux 系统，你可以使用安装软件，或者你也可以查看是否有更符合你系统版本的 [node 的资源](https://github.com/nodesource/distributions)。
 
-Test: Run node -v. The version should be higher than v0.10.32.
+测试: 执行 `node -v`。请确保 node 的版本大于 v0.10.32
 
-### Updating npm
+### 升级 npm
 
-Node comes with npm installed so you should have a version of npm. However, npm gets updated more frequently than Node does, so you'll want to make sure it's the latest version.
+Node 默认为我们安装了某个版本的 npm。然而 npm 的更新频率比 Node 要高一些。所以请尽量使用最新版本的 npm。
 
-sudo npm install npm -g
-
-Test: Run npm -v. The version should be higher than 2.1.8.
+`sudo npm install npm -g`
 
 
-### Installing npm manually
+测试: 执行 `npm -v` 请确保 npm 的版本大于 v2.1.8
 
-For more advanced users.
 
-The npm module is available for download at https://registry.npmjs.org/npm/-/npm-{VERSION}.tgz.
+### 手动安装 npm
+
+为了更多需求的使用者
+
+npm 模块可以从 https://registry.npmjs.org/npm/-/npm-{版本}.tgz 中下载
