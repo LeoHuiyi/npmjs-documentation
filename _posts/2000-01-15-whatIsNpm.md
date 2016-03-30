@@ -1,24 +1,38 @@
 ---
 layout: post
 title:  "npm是什么"
-date:   2016-03-29 11:55:25 +0800
-finished: "☆"
+date:   2016-03-30
+finished: "★"
 tag: 'getting-started'
 order: '01'
 ---
 
-npm makes it easy for JavaScript developers to share and reuse code, and it makes it easy to update the code that you're sharing.
+npm 使得 JavaScript 开发者能更为轻松的分享和重用代码，同样也能轻松的更新你分享的代码。
 
-If you've been working with Javascript for awhile, you might have heard of npm: npm makes it easy for Javascript developers to share the code that they've created to solve particular problems, and for other developers to reuse that code in their own applications.
+如果你已经使用过 Javascript 一段时间了，那么你可能会知道 npm: npm 能够使其他 Javascript
+开发者针对特殊问题所编写的代码被其他开发者重用到他们的自己的项目中。
 
-Once you're depending on this code from other developers, npm makes it really easy to check to see if they've made any updates to it, and to download those updates when they're made.
+如果你依赖过其他开发者的代码，那么 npm 将十分容易地检查出你所依赖的代码是否更新了，并在它们被更新
+时帮助你下载下来。
 
-These bits of reusable code are called packages, or sometimes modules. A package is just a directory with one or more files in it, that also has a filed called "package.json" with some meta data about this package. A typical application, such as a website, will depend on dozens or hundreds of packages. These packages are often small. The general idea is that you create a small building block which solves one problem and solves it well. This makes it possible for you to compose larger, custom solutions out of these small, shared building blocks.
+这些可重用的代码组合被称之为包（package）,有时也称之为模块（modules）。包仅仅是包含了一个或多个文件的目录，
+同样还有一个名为 “package.json” 的文件，它存储了关于包的一些元数据。
 
-There's lots of benefits to this. It makes it possible for your team to draw on expertise outside of your organization by bringing in packages from people who have focused on particular problem areas. But even if you don't reuse code from people outside of your organization, using this kind of module based approach can actually help your team work together better, and can also make it possible to reuse code across projects.
+一个典型的应用，比如一个大型网站，可能需要依赖几十甚至上百个包。但这些包通常都很小。
+所以一般情况下你创建一个代码段解决了一个问题，并且解决得很好。为这些小的，可共享的代码段定制解决方案，这会使得你的应用可以变得更为健壮。
 
-You can find packages to help you build your application by browsing the npm website. When you're browsing the website, you'll find different kinds of packages. You'll find lots of node modules, npm started as the node package manager, so you'll find lots of modules which can be used on the server side. There are also lots of packages which add commands for you to use in the command line. And at this point you can find a number of packages which can be used in the browser, on the front end.
+这样做的好处有很多。你的团队可以从组织外部那些擅长解决这一部分问题的人那里汲取到专业的知识。
+就算你并不需要这样做，但你仍然可以使用这种基于模块化的方式使你的团队配合的更好，也许还可能达到在项目中可重复使用代码的效果。
 
-So now that you have an idea of what npm can do, let's talk about how it works. When people talk about npm, they can be talking about one of three things. They could be talking about the website, which we've just been looking at. Or they could be talking about the registry, which is a big database of information about packages that people are sharing. Or the third thing they could be talking about is the client: when a developer decides to share their code, they use the npm client which is installed on their computer to publish that code up to the registry. And once there's an entry for this package in the registry, then other developers can use their npm clients to install the package from the registry. The entry in the registry for this package is also reflected on the website, where there's a page dedicated to this new package.
+你可以浏览 npm 的网站来寻找能够帮助你搭建应用的各种各样的包。你会找到许多 node 模块，因为 npm 最开始是作为 node 的包管理工具被使用的，
+所以你会找到可以在服务器端使用的各种模块。你也会找到许多添加了命令的包，它们可以在命令行中使用。你还会找到大量可用于浏览器，也就是前端的包。
 
-So that's what npm is. It's a way to reuse code from other developers, and also a way to share your code with them, and it makes it easy to manage the different versions of code.
+据上述，你可能对 npm 的用处有了一些认识，接下来让我们了解一下它是怎样工作的。当人们谈及 npm 时，
+它们可能会谈论三件事情。它们可能谈论网站，这也是我们一直关注的东西。或者可能谈论一些关于包含了分享的包信息的一个大数据库的注册中心。
+又或者它们谈论客户端：当开发者决定分享他们的代码，他们使用安装在电脑上的 npm 客户端将代码发布到注册中心。
+如果使用了某种方式将包发布到了注册中心，那么其他开发者就可以通过客户端从注册中心安装这个包了。
+
+发布到注册中心的包同样会映射到网站上，这个包将会有一个新的专有页面。
+
+因此，究竟 npm 是什么。它提供了一条从其他开发人员那里重用代码的途径，也是将你的代码分享给他人的一条途径，
+并且它会让管理不同版本的代码变得十分简单。
