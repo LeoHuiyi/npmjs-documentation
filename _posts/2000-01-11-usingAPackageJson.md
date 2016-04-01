@@ -9,22 +9,22 @@ order: '05'
 
 四个相同的链接需要替换
 
-The best way to manage locally installed npm packages is to create a `package.json` file.
+管理局部安装包最好的方式是创建一个 `package.json` 文件。
 
-A `package.json` file affords you a lot of great things:
+`package.json` 文件会提供给你许多强大的功能：
 
-1. It serves as documentation for what packages your project depends on
-2. It allows you to specify the versions of a package that your project can use using [semantic versioning rules](https://docs.npmjs.com/getting-started/semantic-versioning)
-3. Makes your build reproducable which means that its way easier to share with other developers.
+1. 它可以是你项目依赖包的文档
+2.它允许你使用[版本的语义规则](https://docs.npmjs.com/getting-started/semantic-versioning)为你项目中的包指定版本
+3. 让你的项目易于搭建，这意味着你可以很轻松的与其他开发者共同协作。
 
-<h3 id="requirements"><a href="#requirements">Requirements</a></h3>
+<h3 id="requirements"><a href="#requirements">必填写的项目</a></h3>
 
-As a bare minimum, `a package.json` must have:
+一个 `package.json` 文件至少要有:
 
 - `"name"`
   * 全部小写
   * 只是一个单词，没有空格
-  * 连字符或者下划线均可使用
+  * 连字符 `-` 或者下划线 `_` 均可使用
 - `"version"`
 
 例如:
@@ -44,20 +44,20 @@ As a bare minimum, `a package.json` must have:
 npm init
 ```
 
-This will initate a command line questionnaire that will conclude with the creation of a package.json in the directory you initiated the command
+这个命令会让你确认或输入一些选项，你确认的这些选项会包含在这个目录的 `package.json` 文件中、
 
 
 <h3 id="the-yes-init-flag"><a href="#the-yes-init-flag">`--yes` 初始化标记</a></h3>
 
-The extended CLI Q&A experience is not for everyone, and often if you are comfortable with using a `package.json` you'd like a more expedited experience.
+这些扩展的CLI问答显然并不适合所有人，有时候你可能只需要利用 `package.json` 的便捷为你提供个快的体验。
 
-You can get a default `package.json` by running `npm init` with the `--yes` or `-y` flag:
+你可以在执行 `npm init` 时添加 `--yes` 或者 `-y` 参数来获取一个默认的 `package.json` 文件：
 
 ``` bash
 npm init --yes
 ```
 
-这样就只会询问一个问题， `author`（作者）, 其余会被填充默认值。
+这样执行时，就只会询问你一个问题， `author`（作者）, 其余会被填充默认值。
 
 ``` bash
 > npm init --yes
@@ -84,18 +84,18 @@ Wrote to /home/ag_dubs/my_package/package.json:
 }
 ```
 
-- `name`：defaults to author name unless in a git directory, in which case it will be the name of the repository
+- `name`：在一个 git 目录下是这个仓库的名字，其他情况下默认为作者名称
 - `version`：总是 `1.0.0`
 - `main`：总是为 `main.js`
 - `script`：默认创建一个空的 `test` 脚本命令
 - `keywords`： 空
-- `author`：就是你才命令行中输入的
+- `author`：就是你在命令行中输入的
 - `license`：`[ISC](https://opensource.org/licenses/ISC)`
-- `repository`: will pull in info from the current directory, if present
-- `bugs`: will pull in info from the current directory, if present
-- `homepage`: will pull in info from the current directory, if present
+- `repository`: 如果有，则会从当前目录下拉取信息
+- `bugs`: 如果有，则会从当前目录下拉取信息
+- `homepage`: 如果有，则会从当前目录下拉取信息
 
-You can also set several config options for the init command. Some useful ones:
+你也可以为 init 命令设置一些配置项，例如：
 
 ``` bash
 npm set init.author.email "wombat@npmjs.com"
@@ -105,14 +105,14 @@ npm set init.license "MIT"
 
 <a href="#NOTE" id="NOTE">`注意`</a>
 
-If there is no description field in the package.json, npm uses the first line of the [README.md](https://github.com/echonest/pyechonest/blob/master/README.md) or README instead. The description helps people find your package on npm search, so it's definitely useful to make a custom description in the package.json to make your package more discoverable.
+如果 `package.json` 中没有描述的字段，npm 会使用 [README.md](https://github.com/echonest/pyechonest/blob/master/README.md)文件的第一行或者 README 来代替。这些描述会帮助人们在使用 npm 的搜索功能时找到你发布的包，所以如果你希望的包能被更容易的检索到，在 package.json 中编写描述信息是十分有用的。
 
-<h3 id="specifying-packages"><a href="#specifying-packages">Specifying Packages</a></h3>
+<h3 id="specifying-packages"><a href="#specifying-packages">在 package.json 中设定包</a></h3>
 
-To specify the packages your project depends on, you need to list the packages you'd like to use in your `package.json` file. There are 2 types of packages you can list:
+为了设置你项目依赖的包，你需要将你想要用的包列在 `package.json` 文件中，你可以列出两种类型的包：
 
-- `"dependencies"`: these packages are required by your application in production
-- `"devDependencies"`: these packages are only needed for development and testing
+- `"dependencies"`: 这些包是你的应用在生产环境中所需要的
+- `"devDependencies"`: 这些包只用于开发和测试
 
 <h4 id="manually-editing-your-package-json"><a href="#manually-editing-your-package-json">手动编辑你的 `package.json`</a></h4>
 
