@@ -17,7 +17,7 @@ order: '05'
 2. 它允许你使用[版本的语义规则](https://docs.npmjs.com/getting-started/semantic-versioning)为你项目中的包指定版本
 3. 让你的项目易于搭建，这意味着你可以很轻松的与其他开发者共同协作。
 
-<h3 id="requirements">[必填写的项目](#requirements)</h3>
+<h3 id="requirements"><a href="#requirements">必填写的项目</a></h3>
 
 一个 `package.json` 文件至少要有:
 
@@ -36,7 +36,7 @@ order: '05'
 }
 ```
 
-<h3 id="creating-a-package-json">[创建一个 `package.json`](#creating-a-package-json)</h3>
+<h3 id="creating-a-package-json"><a href="#creating-a-package-json">创建一个 `package.json`</a></h3>
 
 执行命令创建 `package.json`：
 
@@ -46,7 +46,7 @@ npm init
 
 这个命令会让你确认或输入一些选项，你确认的这些选项会被保存到这个目录的 `package.json` 文件中、
 
-<h3 id="the-yes-init-flag">[`--yes` 初始化标记](#the-yes-init-flag)</h3>
+<h3 id="the-yes-init-flag"><a href="#the-yes-init-flag">`--yes` 初始化标记</a></h3>
 
 这些扩展的CLI问答显然并不适合所有人，有时候你可能只需要利用 `package.json` 的便捷为你提供更快的体验。
 
@@ -102,18 +102,18 @@ npm set init.author.name "ag_dubs"
 npm set init.license "MIT"
 ```
 
-<a href="#NOTE" id="NOTE">`注意`</a>
+<a href="#NOTE" id="NOTE">**注意**</a>
 
 如果 `package.json` 中没有描述的字段，npm 会使用 [README.md](https://github.com/echonest/pyechonest/blob/master/README.md)文件的第一行或者 README 来代替。这些描述会帮助人们在使用 npm 的搜索功能时找到你发布的包，所以如果你希望你发布的包能被更容易的检索到，在 package.json 中编写描述信息是十分有用的。
 
-<h3 id="specifying-packages">[在 package.json 中设定包](#specifying-packages)</h3>
+<h3 id="specifying-packages"><a href="#specifying-packages">在 package.json 中设定包</a></h3>
 
 为了设置你项目依赖的包，你需要将你想要用的包列在 `package.json` 文件中，你可以列出两种类型的包：
 
 - `"dependencies"`: 这些包是你的应用在生产环境中所需要的
 - `"devDependencies"`: 这些包只用于开发和测试
 
-<h4 id="manually-editing-your-package-json">[手动编辑你的 `package.json`](#manually-editing-your-package-json)</h4>
+<h4 id="manually-editing-your-package-json"><a href="#manually-editing-your-package-json">手动编辑你的 `package.json`</a></h4>
 
 你可以编辑你的 `package.json`文件。 创建一个属性名为 `dependencies` 对象，这个对象中的属性名就是你想使用的包的名称，而对应的值则是符合 [semver](https://docs.npmjs.com/getting-started/semantic-versioning) 描述的与你的项目兼容的版本。
 
@@ -134,7 +134,7 @@ npm set init.license "MIT"
 }
 ```
 
-<h3 id="the-save-and-save-dev-install-flags">[安装参数 `--save` 和 `--save-dev`](#the-save-and-save-dev-install-flags)</h3>
+<h3 id="the-save-and-save-dev-install-flags"><a href="#the-save-and-save-dev-install-flags">安装参数 `--save` 和 `--save-dev`</a></h3>
 
 将依赖添加进 `package.json` 中最简单也是最好的方法是使用命令行，在执行 `npm install` 命令时添加 `--save` 或 `--save-dev` 参数就会按照你的使用习惯添加进依赖中。
 
@@ -150,7 +150,7 @@ npm install <package_name> --save
 npm install <package_name> --save-dev
 ```
 
-<h3 id="managing-dependency-versions">[管理依赖的版本](#managing-dependency-versions)</h3>
+<h3 id="managing-dependency-versions"><a href="#managing-dependency-versions">管理依赖的版本</a></h3>
 
 npm 使用语义化版本声明，即我们通常所说的，SemVer，来管理包的版本和版本区间。
 
