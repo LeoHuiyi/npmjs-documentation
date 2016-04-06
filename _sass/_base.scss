@@ -200,3 +200,9 @@ footer a { text-decoration: underline; }
 h1.post-title { font-size: 43px; font-weight: 500; letter-spacing: -.6px; line-height: 1.2; padding: 15px 0 0 0;}
 .post-title a { color: #333; }
 .post-title a:hover { color: #cb3837; text-decoration: underline; }
+#side-nav { position: fixed; left: 0; top: 40px; }
+#side-nav ul { margin-left: 14px; }
+#side-nav li { border-left: 2px solid transparent; padding-left: 5px; font-size: 14px; }
+#side-nav li a { color: #333 }
+#side-nav li:hover { border-left: 2px solid #cb3837; }
+#side-nav li:hover a, #side-nav li a.active { color: #cb3837;  }

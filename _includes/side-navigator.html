@@ -1,0 +1,22 @@
+<nav id="side-nav">
+<div>
+  <h3>开始</h3>
+  <ul>
+    {% for post in site.posts %}
+    {% if post.tag == 'getting-started' %}
+      <li><a href="{{ post.url | prepend: site.url }}">{{post.title}}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+<div>
+  <h3>npm 是怎样工作的</h3>
+  <ul>
+    {% for post in site.posts %}
+    {% if post.tag == 'how-npm-works' %}
+      <li><a href="{{ post.url | prepend: site.url }}">{{post.title}}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</nav>
