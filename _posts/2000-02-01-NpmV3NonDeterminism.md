@@ -1,29 +1,33 @@
 ---
 layout: post
-title:  "npm3 Non-determinism"
+title:  "npm3 的非确定性"
 date:   2016-03-29 11:55:25 +0800
-finished: "☆"
+finished: "★"
 tag: 'how-npm-works'
 order: '05'
 ---
 
-As stated a few pages back in our example:
+正如我们之前几页例子中所说的那样：
 
 ![](https://docs.npmjs.com/images/install-order.png)
+（译：你的 `node_modules` 的目录结构和你的依赖树形式取决于**安装顺序**）
 
-If you, and your development team, use a package.json, as well as the interactive npm install command to add pkgs (like most teams using npm do), it is likely that you will run into a situation where your local node_modules directory will differ from both your coworkers' node_modules directories, as well as the node_modules directories on your staging, testing, or production servers.
+如果你，或你的开发团队使用了 `package.json`。就可以使用交互命令 `npm install` 来添加包（就如许多团队使用npm一样），
+有一种情况可能会发生：你在本地机器上执行安装后的 `node_modules` 目录会与你同事们的 `node_modules` 目录不太一样，
+这种情况也可能会在你的分布、测试和生产服务器上出现。
 
-In short? npm3 does not install dependencies in a deterministic way.
+出现这种情况的原因，简言之是因为，npm3 不是以确定的方式来安装依赖的。
 
-That's probably not a comforting statement to read, but in this article we'll discuss why this happens, as well as assure you that it has no implications for your application, as well as explain the steps to reliably (re)create a single, consistent, node_modules directory, should you want to do that.
+这么解释可能并不能起到安慰的作用，但是在这篇文章中我们会探讨为什么会发生这类事情，以及向你保证它对你的应用不会造成任何影响，
+以及展示如何可靠地创建（重建）一个简单，一致的 `node_modules` 目录的步骤。
 
-<h3 id="example">[例子](#example)</h3>
+<h3 id="example"><a href="#example">例子</a></h3>
 
-Let's jump back to an example application from a few examples ago:
+让我们回到之前用来举例的应用，并倒退几步：
 
 ![](https://docs.npmjs.com/images/npm3deps8.png)
 
-In this example, our app has the following package.json:
+这个例子中的，`package.json` 如下：
 
 ``` json
 {
@@ -46,15 +50,15 @@ In this example, our app has the following package.json:
 }
 ```
 
-On an npm install we will see this in our terminal:
+在执行了 `npm install` 之后我们可以在终端里看到：
 
 ![](https://docs.npmjs.com/images/npm3deps14.png)
 
-Now, let's say a developer on our team decides to complete a feature that requires that they update Module A to v2.0, which now has a dependency on Module B v2.0, instead of, as previously, Module B v1.0.
+现在，我们团队中的某个开发者决定实现一个功能，然后需要将 A 模块升级到 2.0，在 2.0 版本中 A 模块使用 v2.0 的 B 模块取代了之前的 v1.0 的 B 模块。
 
 ![](https://docs.npmjs.com/images/npm3deps9.png)
 
-Our developer uses the interactive npm install command to install the new version of Module A, and save it to the package.json:
+我们的开发者使用交互命令 `npm install` 来安装了新版本的 A 模块，并将其保存到 `package.json` 中：
 
 ``` bash
 npm install mod-a@2 --save
@@ -64,11 +68,11 @@ npm install mod-a@2 --save
 
 ![](https://docs.npmjs.com/images/npm3deps15.png)
 
-We now have something that looks like this:
+现在我们的项目会变成这样：
 
 ![](https://docs.npmjs.com/images/npm3deps10.png)
 
-Now let's say that our developer finished the feature requiring the new version of Module A and pushes the application to a testing server that runs npm install on the new package.json:
+现在开发者实现了这个功能，载入了新版本的 A 模块并将应用推送到了测试服务器，然后我们使用新的 `package.json` 进行安装：
 
 ``` json
 {
@@ -91,36 +95,39 @@ Now let's say that our developer finished the feature requiring the new version 
 }
 ```
 
-The testing server's log shows this:
+测试服务器的日志如下：
 
 ![](https://docs.npmjs.com/images/npm3deps16.png)
 
-Which, when visualized, looks like this:
+可视化的时候，看起来像这样：
 
 ![](https://docs.npmjs.com/images/npm3deps17.png)
 
-Whoa, what?! This tree is completely different than the tree that exists on our developer's local machine. What happened?
+发生了什么？！为什么安装完成了之后的结构树与我们开发者本地机器上的结构树不同？
 
-**Remember: install order matters.**
+**要记得：最主要的是安装顺序**
 
-When our developer updated Module A using the interactive npm install Module A v2.0 was functionally the last package installed. Because our developer had done an npm install when they first started working on the project, all modules listed in the package.json were already installed in the node_modules folder. Then Module A v2.0 was installed.
+当我们的开发者在开发新功能时使用 `npm install` 将 A 模块更新到 2.0 版本时。由于我们的开发者最开始的工作的时候已经执行过 `npm install`,
+所以所有列于 `package.json` 中的包已经被安装到了 `node_modules` 文件夹下，在此之后 2.0 版本的模块 A 才被安装。
 
-It follows, then, that Module Bv1.0, a top level dependency because of Module A v1.0, then anchored by Module E v1.0, remains a top level dependency. Because Module Bv1.0 occupies the top-level, no other version of Module B can-- therefore, Module Bv2.0 remains a nested dependency under Module C v1.0 and Module D v1.0, and becomes a nested dependency for the new Module A v2.0 dependency.
+1.0 版的 B 模块是因为被 1.0 版本的 A 模块依赖才会被添加进目录的第一级，此后由于再次被 1.0 版的 E 模块依赖，才会保留在目录的第一级。
+由于 1.0 版的 B 模块存在于目录的第一级，这就导致其他版本的 B 模块就不能在第一级了，所以 2.0 版本的 B 模块就会被嵌套依赖在 v1.0 C 模块和
+v1.0 D模块下，并且也成为 v2.0 A 模块的嵌套依赖。
 
-Let's consider what happened on the testing server. The project was pulled into a fresh directory, i.e. does not have a pre-existing node_modules directory. Then npm install is run, perhaps by a deploy script, to install dependencies from the package.json.
+让我们考虑一下测试服务器中会发生什么，项目会推送到一个全新的路径下，此前并不存在一个 `node_modules` 目录。然后执行 `npm install`（这个命令也可能是通过部署的脚本间接执行的）来安装 `package.json` 中的依赖。
 
-This package.json now has Module A v2.0 listed in it, and thanks to alphabetical order (enforced by the npm install command), is now installed first, instead of last.
+`package.json` 中已经含有了 2.0版的 A 模块，并多亏了字母排序（由`npm install` 命令执行的），如今它被第一个安装，而不是最后一个
 
-When Module A v2.0 is installed first, in a clear node_modules directory, its dependencies are the first candidates for the top-level position. As a result, Module B v2.0 is installed in the top-level of the node_modules directory.
+在一个新建的 `node_nodules` 目录中，当 2.0 版的 A 被首先安装时，它的依赖就会被确定在目录的第一级，因此，2.0 版的 B 模块会被安装到 `node_nodules` 的最顶层。
 
-Now, when it is time to install Module E v1.0, its dependency, Module B v1.0, cannot occupy the top-level of the node_modules directory, because Module B v2.0 is already there. Therefore, it is nested under Module E v1.0.
+现在，轮到安装 v1.0 的 E 模块了，它的依赖，也就是 1.0版的 B 模块，由于 2.0 版的存在，便不能占据 `node_nodules` 目录的最顶层了。所以它会被嵌套到 v1.0 的内部。
 
-<h3 id="do-different-dependency-tree-structures-affect-my-app">[Do different dependency tree structures affect my app?](#do-different-dependency-tree-structures-affect-my-app)</h3>
+<h3 id="do-different-dependency-tree-structures-affect-my-app"><a href="#do-different-dependency-tree-structures-affect-my-app">使用不同的依赖结构会不会影响到我们的应用？</a></h3>
 
-No! Even though the trees are different, both sufficiently install and point all your dependencies at all their dependencies, and so on, down the tree. You still have everything you need, it just happens to be in a different configuration.
+完全不会，尽管结构树是不同的，但你的依赖和其他人的依赖却都可以被完整地安装，结构树中的所有的东西都是你需要的，它仅仅在配置上有所不同。
 
-<h3 id="i-want-my-node-modules-directory-to-be-the-same">[I want my node_modules directory to be the same. How can I do that?](#i-want-my-node-modules-directory-to-be-the-same)</h3>
+<h3 id="i-want-my-node-modules-directory-to-be-the-same"><a href="#i-want-my-node-modules-directory-to-be-the-same">我希望我的 `node_modules` 目录始终保持一致，该怎么做</a></h3>
 
-The npm install command, when used exclusively to install packages from a package.json, will always produce the same tree. This is because install order from a package.json is always alphabetical. Same install order means that you will get the same tree.
+`npm install` 命令在用于安装 `package.json` 中描述的依赖时（译：也就是不加参数的时候），将总会生成相同的结构树，这是因为 `package.json` 中的安装顺序始终遵循着字母表。相同的安装顺序便意味着会得到相同的结构树。
 
-You can reliably get the same dependency tree by removing your node_modules directory and running npm install whenever you make a change to your package.json.
+你可以在你修改过 `package.json` 之后将你的 `node_modules` 目录删除并重新安装来获得相同的依赖结构树，

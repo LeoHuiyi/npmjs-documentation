@@ -1,78 +1,78 @@
 ---
 layout: post
-title:  "npm3 Duplication and Deduplication"
+title:  "npm3 复制和重复数据删除"
 date:   2016-03-29 11:55:25 +0800
-finished: "☆"
+finished: "★"
 tag: 'how-npm-works'
 order: '04'
 ---
 
-Let's continue with our example before. Currently we have an application that depends on 2 modules:
+让我们继续之前的例子，目前，我们拥有一个依赖了两个模块的应用:
 
-- Module-A, depends on Module B v1.0
-- Module-C, depends on Module B v2.0
+- A 模块, 依赖 v1.0 版本的 B 模块
+- C 模块, 依赖 v2.0 版本的 B 模块
 
 ![](https://docs.npmjs.com/images/appsofar.png)
 
-Now we ask ourselves, what happens if we install another module that depends on Module B v1.0? or Module B v2.0?
+那么现在我们考虑一个这样的问题，当我们再次安装一个依赖 1.0版本或2.0版本的 B 的模块将会发生什么？
 
-<h3 id="example">[例子](#example)</h3>
+<h3 id="example"><a href="#example">例子</a></h3>
 
-Ok, so let's say we want to depend on another package, module D. Module D depends on Module B v2.0, just like Module C.
+好，那我们就来实践一下，依赖另一个模块，D 模块。D 模块依赖 v2.0 的 B 模块 。就像 C 模块一样。
 
 ![](https://docs.npmjs.com/images/npm3deps5.png)
 
-Because B v1.0 is already a top-level dependency, we cannot install B v2.0 as a top level dependency. Therefore Module B v2.0 is installed as a nested dependency of Module D, even though we already have a copy installed, nested beneath Module C.
+因为 1.0 版本的 B 模块已经是在目录的第一级，我们便不能将 2.0版本的 B 模块安装在目录的第一级中。因此同样会在 D 模块中嵌套安装 2.0 版本的 B 模块，尽管我们已经在 C 模块下安装了 v2.0 B 模块的一个副本。
 
 ![](https://docs.npmjs.com/images/npm3deps6.png)
 
-If a secondary dependency is required by 2+ modules, but was not installed as a top-level dependency in the directory hierarchy, it will be duplicated and nested beneath the primary dependency.
+如果一个二级依赖被载入了两次，但是在目录层次中它并不处于第一层，那么它就会被复制并嵌套在主依赖下。
 
-However, if a secondary dependency is required by 2+ modules, but is installed as a top-level dependency in the directory hierarchy, it will not be duplicated, and will be shared by the primary dependencies that require it.
+但是如果一个二级依赖被载入了两次，但是在目录结构中它是安装在第一层的，那他就不会被复制并嵌套在主依赖下。
 
-For example, let's say we now want to depend on Module E. Module E, like Module A, depends on Module B v1.0.
+举个例子，如我们上面所想，我们再来依赖一个 E 模块，像 A 模块一样依赖 1.0 版本的 B 模块。
 
 ![](https://docs.npmjs.com/images/npm3deps7.png)
 
-Because B v1.0 is already a top-level dependency, we do not need to duplicate and nest it. We simply install Module E and it shares Module B v1.0 with Module A.
+由于 1.0 版本的 B 模块已经安装在了目录的第一级，所以我们不需要复制和嵌套它。我们只需要简单地安装 E 模块并与 A 模块共享 1.0 版本的 B 模块就好了。
 
 ![](https://docs.npmjs.com/images/npm3deps8.png)
 
-This appears like this in the terminal:
+在终端里会显示成这样：
 
 ![](https://docs.npmjs.com/images/tree2.png)
 
-Now-- what happens if we update Module A to v2.0, which depends on Module B v2.0, not Module B v1.0?
+现在 -- 我们要将 A 模块升级到 2.0 版。它依赖 2.0 版的 B 模块，而不是之前的 1.0 版的 B 模块, 看看将会发生什么。
 
 ![](https://docs.npmjs.com/images/npm3deps9.png)
 
-**The key is to remember that install order matters.**
+**关键是要记住安装顺序的问题**
 
-Even though Module A was installed first (as v1.0) via our package.json (because it is ordered alphabetically), using the interactive npm install command means that Module A v2.0 is the last package installed.
+尽管 A（1.0 版） 是通过我们的 `package.json` 文件安装的第一个模块（安装顺序是根据字母顺序决定的），但是使用交互界面的
+`npm install` 命令安装就意味着，2.0 的模块 A 将作为最后一个包被安装。
 
-As a result, npm3 does the following things when we run npm install mod-a@2 --save:
+因此，npm3 在我们执行了 `npm install mod-a@2 --save` 之后会做以下的事情：
 
-- it removes Module A v1.0
-- it installs Modules A v2.0
-- it leaves Module Bv1.0 because Module E v1.0 still depends on it
-- it installs Module Bv2.0 as a nested dependency under Module A v2.0, since Module B v1.0 is already occupying the top level in the directory hierarchy
+- 删除 v1.0 的 A 模块
+- 安装 v2.0 的 A 模块
+- 它保留了 v1.0 的 B 模块，因为还有 E 模块依赖它
+- 将 v2.0 的 B 模块嵌套安装在 v2.0 A模块内，这是因为 v1.0 的 B 模块已经占据了目录的第一级
 
 ![](https://docs.npmjs.com/images/npm3deps10.png)
 
-This looks like this in the terminal:
+在终端里，大致会显示成如此：
 
 ![](https://docs.npmjs.com/images/tree4.png)
 
-Now, this is clearly not ideal. We have Module B v2.0 in nearly every directory. To get rid of duplication, we can run:
+现在这种情况显然并不是很理想，我们几乎在每个目录下都有 2.0 版的 B 模块，为了解决重复问题，我们可以执行：
 
 ``` bash
 npm dedupe
 ```
-
-This command resolves all of the packages dependencies on Module B v2.0 by redirecting them to the top level copy of Module B v2.0 and removes all the nested copies.
+这个命令会将所有包中依赖的 v2.0 的 B 模块重定向到目录第一级中被复制出的 2.0 的 B 模块上并删除所有嵌套的复制品。
 
 ![](https://docs.npmjs.com/images/npm3deps13.png)
 
-This looks like this in the terminal:
+在终端里，大致会显示成如此：
 
 ![](https://docs.npmjs.com/images/tree5.png)
