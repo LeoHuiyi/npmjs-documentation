@@ -20,7 +20,7 @@ order: '12'
 
 除了像 npm-developers 中的描述一样在局部 `.gitignore ` 或者 ` .npmignore` 文件被忽略，目录内的所有文件都会被包含进去。
 
-测试：浏览 [https://npmjs.com/package/<package>](https://npmjs.com/package/<package>) ，你应该能看到你新发布的包的信息。
+测试：浏览 [https://npmjs.com/package/\<package\>](https://npmjs.com/package/<package>) ，你应该能看到你新发布的包的信息。
 
 ### 更新 npm 包
 
@@ -28,6 +28,6 @@ order: '12'
 
 更新版本号之后，你可以再次执行 `npm publish` 来发布。
 
-测试：浏览 [https://npmjs.com/package/<package>](https://npmjs.com/package/<package>) ，这个包的版本号应该被更新了。
+测试：浏览 [https://npmjs.com/package/\<package\>](https://npmjs.com/package/<package>) ，这个包的版本号应该被更新了。
 
 除非你的包发布了新版本，否则显示在网站中的自述文件将不会被更新，所以你需要运行 `npm version patch` 和 `npm publish` 来更新显示在网站上的文档。
