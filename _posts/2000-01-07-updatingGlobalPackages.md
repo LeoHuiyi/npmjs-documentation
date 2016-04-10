@@ -1,14 +1,13 @@
 ---
 layout: post
-title:  "更新安装在全局的包文件"
+title:  "更新安装在全局使用的的包"
 date:   2016-03-29 11:55:25 +0800
 finished: "★"
 tag: 'getting-started'
 order: '09'
 ---
-有1个需要替换的连接
 
-使用 `npm install -g <package>` 可以更新全局包文件：
+使用 `npm install -g <package>` 可以更新安装在全局包文件：
 
 ```bash
 npm install -g jshint

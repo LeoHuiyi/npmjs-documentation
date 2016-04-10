@@ -7,8 +7,6 @@ tag: 'getting-started'
 order: '05'
 ---
 
-四个相同的链接需要替换
-
 管理局部安装包最好的方式是创建一个 `package.json` 文件。
 
 `package.json` 文件会提供给你许多强大的功能：

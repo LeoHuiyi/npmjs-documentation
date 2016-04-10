@@ -1,13 +1,11 @@
 ---
 layout: post
-title:  "安装局部的 npm 包"
+title:  "局部安装一个 npm 包"
 date:   2016-03-29 11:55:25 +0800
 finished: "★"
 tag: 'getting-started'
 order: '04'
 ---
-
-有3个需要替换的连接
 
 npm 包有两种安装方式：局部安装和全局安装。选择哪种方式取决于你想如何使用它们。
 
