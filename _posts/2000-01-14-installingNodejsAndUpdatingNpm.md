@@ -7,14 +7,14 @@ tag: 'getting-started'
 order: '02'
 ---
 
-### 安装 Node.js
+<h3 id="install-nodejs"><a href="#install-nodejs">安装 Node.js</a></h3>
 
 如果你的系统是 OS X 或者 Windows, 那么安装 Node.js 最好的方式是使用 [nodejs.org](https://nodejs.org/en/) 网站中的安装软件来安装。
 如果你使用的是 Linux 系统，你可以使用安装软件，或者你也可以查看是否有更符合你系统版本的 [node 的资源](https://github.com/nodesource/distributions)。
 
 测试: 执行 `node -v`。请确保 node 的版本大于 v0.10.32
 
-### 升级 npm
+<h3 id="update-npm"><a href="#update-npm">升级 npm</a></h3>
 
 Node 默认为我们安装了某个版本的 npm。然而 npm 的更新频率比 Node 要高一些。所以请尽量使用最新版本的 npm。
 
@@ -23,8 +23,7 @@ Node 默认为我们安装了某个版本的 npm。然而 npm 的更新频率比
 
 测试: 执行 `npm -v` 请确保 npm 的版本大于 v2.1.8
 
-
-### 手动安装 npm
+<h3 id="install-npm-mual"><a href="#install-npm-mual">手动安装 npm</a></h3>
 
 为了更多需求的使用者
 
