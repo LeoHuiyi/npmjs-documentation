@@ -3,31 +3,31 @@ layout: default
 ---
 
 <img class="logo" src="https://docs.npmjs.com/images/npm.svg" alt="">
-<p class="sub-title">这些是你需要的文档</p>
+<p class="sub-title">这些都是你要找的文档</p>
 
 <div class="toc">
 <section>
-  <h3>开始</h3>
+  <h3>★ 开始 </h3>
   <ul class="page-columns">
     {% for post in site.posts %}
     {% if post.tag == 'getting-started' %}
-      <li><a href="{{ post.url | prepend: site.url }}">{{post.order}} - {{post.title}}{{ post.finished}}</a></li>
+      <li><a href="{{ post.url | prepend: site.url }}">{{post.order}} - {{post.title}}</a></li>
     {% endif %}
     {% endfor %}
   </ul>
 </section>
 <section>
-  <h3>npm 是怎样工作的</h3>
+  <h3>★ npm 是怎样工作的</h3>
   <ul class="page-columns">
     {% for post in site.posts %}
     {% if post.tag == 'how-npm-works' %}
-      <li><a href="{{ post.url | prepend: site.url }}">{{post.order}} - {{post.title}}{{ post.finished}}</a></li>
+      <li><a href="{{ post.url | prepend: site.url }}">{{post.order}} - {{post.title}}</a></li>
     {% endif %}
     {% endfor %}
   </ul>
 </section>
 <section>
-  <h3>私有模块</h3>
+  <h3>☆ 私有模块</h3>
   <ul class="page-columns">
     {% for post in site.posts %}
     {% if post.tag == 'private-modules' %}
@@ -37,7 +37,7 @@ layout: default
   </ul>
 </section>
 <section>
-  <h3>组织</h3>
+  <h3>☆ 组织</h3>
   <ul class="page-columns">
     {% for post in site.posts %}
     {% if post.tag == 'organization' %}
@@ -47,7 +47,7 @@ layout: default
   </ul>
 </section>
 <section>
-  <h3>使用 npm</h3>
+  <h3>☆ 使用 npm</h3>
   <ul class="page-columns">
 
   </ul>
