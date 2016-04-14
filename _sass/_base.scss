@@ -201,6 +201,8 @@ header a { color: white; padding: 0 10px; font-size: 14px; text-decoration: none
   }
   header { display: none; }
   .page-logo { display: block; }
+  #side-nav { display: none; }
+
 }
 
 
@@ -220,7 +222,7 @@ h1.post-title { font-size: 43px; font-weight: 500; letter-spacing: -.6px; line-h
 #side-nav h3.active { color: #cb3837; }
 #side-nav h3:hover { color: #cb3837; text-decoration: underline; cursor: pointer; }
 #side-nav ul { margin-left: 0; }
-#side-nav li { border-left: 3px solid transparent; padding-left: 10px; font-size: 14px; transition: all .2s; }
+#side-nav li {list-style: none; border-left: 3px solid transparent; padding-left: 10px; font-size: 14px; transition: all .2s; }
 #side-nav li a { color: #333; line-height: 1.6; font-size: 15px; }
 #side-nav li:hover, #side-nav li.active { border-left: 3px solid #cb3837; }
 #side-nav li:hover a, #side-nav li.active a { color: #cb3837;  }
