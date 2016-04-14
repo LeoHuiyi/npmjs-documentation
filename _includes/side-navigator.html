@@ -1,17 +1,22 @@
 <nav id="side-nav">
+<a href="{{ site.url }}">
+  <img class="small-logo" src="https://docs.npmjs.com/images/npm.svg" alt="">
+</a>
 <div>
-  <h3>开始</h3>
-  <ul>
+  <h3 class="{% if page.tag == 'getting-started' %}{{ 'active' }}{% endif %}">开始 {{ post.tag }}</h3>
+  <ul style="display: none">
     {% for post in site.posts %}
     {% if post.tag == 'getting-started' %}
-      <li><a href="{{ post.url | prepend: site.url }}">{{post.title}}</a></li>
+      <li class="{% if page.url == post.url %}{{ 'active' }}{% endif %}">
+        <a href="{{ post.url }}">{{post.order}} - {{post.title}}</a>
+      </li>
     {% endif %}
     {% endfor %}
   </ul>
 </div>
 <div>
-  <h3>npm 是怎样工作的</h3>
-  <ul>
+  <h3 class="{% if page.tag == 'how-npm-works' %}{{ 'active' }}{% endif %}">npm 是怎样工作的</h3>
+  <ul style="display: none">
     {% for post in site.posts %}
     {% if post.tag == 'how-npm-works' %}
       <li><a href="{{ post.url | prepend: site.url }}">{{post.title}}</a></li>
@@ -20,3 +25,25 @@
   </ul>
 </div>
 </nav>
+
+<script>
+var chapterHeaders = document.querySelectorAll('#side-nav h3')
+
+for (var i = 0; i < chapterHeaders.length; i++) {
+  if (chapterHeaders[i].className == 'active') {
+    chapterHeaders[i].nextSibling.nextSibling.style.display = 'block'
+  }
+  chapterHeaders[i].addEventListener('click', function () {
+    if(this.className == "active") {
+      this.className = ""
+      this.nextSibling.nextSibling.style.display = 'none'
+    }
+    else {
+      this.className = "active"
+      this.nextSibling.nextSibling.style.display = 'block'
+    }
+
+  }, false)
+}
+
+</script>
